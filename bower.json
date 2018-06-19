@@ -1,0 +1,6 @@
+{
+  "name": "tpcig-bundle",
+  "dependencies": {
+    "polymer": "^3.0.2"
+  }
+}

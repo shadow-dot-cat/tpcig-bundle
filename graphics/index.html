@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+  <script>
+(function() {
+  nodecg.listenFor('ping', message => {
+    nodecg.log.info(message);
+  });
+})();
+  </script>
+</body>
+</html>

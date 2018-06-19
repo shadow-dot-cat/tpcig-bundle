@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+  <p>Testing</p>
+  <button id="boop">Boop</button>
+  <script>
+(function() {
+  'use strict';
+  const button_boop = document.getElementById('boop');
+
+  button_boop.addEventListener('click', () => {
+    console.info('boop');
+    nodecg.sendMessage('ping', 'pong');
+  });
+})();
+  </script>
+</body>
+</html>
