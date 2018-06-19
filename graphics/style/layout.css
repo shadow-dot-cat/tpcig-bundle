@@ -1,7 +1,4 @@
-body {
-  margin: 0;
-  opacity: 1;
-}
+@import 'reset.css';
 
 #container {
   position: absolute;
