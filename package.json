@@ -34,6 +34,18 @@
         "width": 1280,
         "height": 720
       }
+    ],
+    "assetCategories": [
+      {
+        "name": "tpcig-sponsors",
+        "title": "TPCiG Sponsors",
+        "allowedTypes": [
+          "png",
+          "jpeg",
+          "jpg",
+          "gif"
+        ]
+      }
     ]
   },
   "repository": "https://github.com/nodecg/nodecg.git"

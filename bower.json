@@ -1,6 +1,8 @@
 {
   "name": "tpcig-bundle",
   "dependencies": {
-    "polymer": "^3.0.2"
+    "polymer": "^2.6.0",
+    "iron-image": "^2.2.1",
+    "gsap": "^2.0.1"
   }
 }
