@@ -9,13 +9,23 @@
   <link rel="import" href="elements/tpcig-sponsors/tpcig-sponsors.html">
   <style>
     tpcig-omnibar {
+      position: absolute;
       bottom: 0;
     }
     #sidebar {
       position: absolute;
-      width: 600px;
+      width: 550px;
       height: calc(100% - 120px);
-      background-color: lightblue;
+      background: linear-gradient(
+        to right,
+        #ebf1f6 0%,
+        #abd3ee 1%,
+        #d5ebfb 5%,
+        #f9f9f9 50%,
+        #d5ebfb 95%,
+        #abd3ee 99%,
+        #ebf1f6 100%
+      );
     }
     #talkTitle {
       background-color: lightgreen;
@@ -33,33 +43,25 @@
     }
     #slidesOuter {
       position: absolute;
-        left: 600px;
-        width: calc(1920px - 600px);
+        left: 550px;
+        width: calc(1920px - 550px);
           height: calc(100% - 120px);
-            background-color: teal;
     }
     #slides {
-      width: 1280px;
-      height: 720px;
-      margin: auto;
-        margin-top: calc((1080px - 720px - 120px) / 2);
+      width: 100%;
+      height: calc((1920px - 550px) / 16 * 9);
       background-color: black;
     }
   </style>
 </head>
 <body>
   <div id="sidebar">
-    <div id="talkTitle">
-      Some Person - Some Thing
-    </div>
-    <div id="speaker">
-    </div>
-    <div id="sponsors">
-      <tpcig-sponsors></tpcig-sponsors>
-    </div>
   </div>
   <div id="slidesOuter">
     <div id="slides">
+    </div>
+    <div id="sponsors">
+      <tpcig-sponsors></tpcig-sponsors>
     </div>
   </div>
   <tpcig-omnibar></tpcig-omnibar>
