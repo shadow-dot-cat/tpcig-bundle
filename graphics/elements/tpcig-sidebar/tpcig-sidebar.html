@@ -1,0 +1,39 @@
+<dom-module id="tpcig-sidebar">
+  <template>
+    <style>
+      :host {
+        width: 550px;
+        height: 960px;
+        display: flex;
+        flex-direction: column;
+      }
+      .block {
+        width: 500px;
+        background-color: rgb(249,249,249,255);
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-top: 15px;
+        height: 20px;
+        box-shadow: 4px 4px 17px 0px rgba(128,128,128,1);
+      }
+      #header {
+        height: 160px;
+      }
+      #screen {
+        height: calc((500px / 16) * 9);
+      }
+      #info {
+        flex-grow: 1;
+        margin-bottom: 15px;
+      }
+    </style>
+
+    <div id="header" class="block">
+    </div>
+    <div id="screen" class="block">
+    </div>
+    <div id="info" class="block">
+    </div>
+</template>
+<script src="tpcig-sidebar.js"></script>
+</dom-module>

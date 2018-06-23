@@ -1,0 +1,49 @@
+<dom-module id="tpcig-body">
+  <template>
+    <style>
+      :host {
+        width: 1370px;
+        height: 960px;
+        display: flex;
+        flex-direction: column;
+      }
+      .block {
+        background-color: rgb(249,249,249,255);
+        box-shadow: 4px 4px 17px 0px rgba(128,128,128,1);
+      }
+      #slides {
+        background-color: rgb(255,255,255,0.8);
+        margin-right: 25px;
+        width: 1345px;
+        height: calc((1345px / 16) * 9);
+      }
+      #body {
+        width: 1345px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        margin-right: 25px;
+      }
+      #bodyLeft {
+        width: calc((1345px / 2) - (25px / 2));
+        margin-right: 25px;
+        flex-grow: 1;
+      }
+      #bodyRight {
+        width: calc((1345px / 2) - (25px / 2));
+        flex-grow: 1;
+      }
+    </style>
+    <div id="slides">
+    </div>
+    <div id="body">
+      <div id="bodyLeft" class="block">
+      </div>
+      <div id="bodyRight" class="block">
+      </div>
+    </div>
+  </template>
+  <script src="tpcig-body.js"></script>
+</dom-module>

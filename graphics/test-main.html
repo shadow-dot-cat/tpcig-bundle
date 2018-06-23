@@ -7,63 +7,32 @@
   <link rel="import" href="/bundles/tpcig-bundle/bower_components/polymer/polymer.html">
   <link rel="import" href="elements/tpcig-omnibar/tpcig-omnibar.html">
   <link rel="import" href="elements/tpcig-sponsors/tpcig-sponsors.html">
+  <link rel="import" href="elements/tpcig-sidebar/tpcig-sidebar.html">
+  <link rel="import" href="elements/tpcig-body/tpcig-body.html">
   <style>
+    body {
+      width: 1920;
+      height: 1080;
+      background-image: url('/bundles/tpcig-bundle/graphics/elements/images/tpcig-main-background.png');
+    }
     tpcig-omnibar {
       position: absolute;
-      bottom: 0;
+      top: 960px;
     }
-    #sidebar {
+    tpcig-sidebar {
       position: absolute;
-      width: 550px;
-      height: calc(100% - 120px);
-      background: linear-gradient(
-        to right,
-        #ebf1f6 0%,
-        #abd3ee 1%,
-        #d5ebfb 5%,
-        #f9f9f9 50%,
-        #d5ebfb 95%,
-        #abd3ee 99%,
-        #ebf1f6 100%
-      );
+      top: 0;
+      left: 0;
     }
-    #talkTitle {
-      background-color: lightgreen;
-        height: calc(100% - ( 600px / 16 * 9 ) * 2 );
-    }
-    #speaker {
-      background-color: lightgrey;
-      width: 100%;
-      height: calc(600px /16 * 9);
-    }
-    #sponsors {
-      margin-top: auto;
-      width: 100%;
-      height: calc(600px /16 * 9);
-    }
-    #slidesOuter {
+    tpcig-body {
       position: absolute;
-        left: 550px;
-        width: calc(1920px - 550px);
-          height: calc(100% - 120px);
-    }
-    #slides {
-      width: 100%;
-      height: calc((1920px - 550px) / 16 * 9);
-      background-color: black;
+      left: 550px;
     }
   </style>
 </head>
 <body>
-  <div id="sidebar">
-  </div>
-  <div id="slidesOuter">
-    <div id="slides">
-    </div>
-    <div id="sponsors">
-      <tpcig-sponsors></tpcig-sponsors>
-    </div>
-  </div>
+  <tpcig-sidebar></tpcig-sidebar>
+  <tpcig-body></tpcig-body>
   <tpcig-omnibar></tpcig-omnibar>
 </body>
 </html>
