@@ -1,0 +1,22 @@
+<script src="/bower_components/moment/moment.js"></script>
+
+<dom-module id="schedule-item">
+  <template>
+    <style>
+      .info {
+        font-size: 14px;
+        color: darkgray;
+      }
+    </style>
+    <div id="title">
+      [[value.title]]
+    </div>
+    <div class="info">
+      [[speaker.name]] / [[room.name]]
+    </div>
+    <div class="info">
+      [[formatted_start]] - [[formatted_end]]
+    </div>
+  </template>
+  <script src="schedule-item.js"></script>
+</dom-module>

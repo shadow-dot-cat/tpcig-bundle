@@ -1,0 +1,62 @@
+<link rel="import" href="/bower_components/nodecg-replicant/nodecg-replicant.html">
+<link rel="import" href="/bower_components/polymer/lib/mixins/mutable-data.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="speaker-item.html">
+<link rel="import" href="speaker-edit.html">
+
+<dom-module id="tpcig-speaker-management">
+  <template>
+    <style>
+    :host {
+      @apply --layout-vertical;
+    }
+
+    #label {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      background-color: #C4C4C4;
+      height: 29px;
+      @apply --layout-horizontal;
+      @apply --layout-center-center;
+    }
+
+    #scrollWrapper {
+      margin: 10px;
+      padding-right: 12px;
+      overflow-y: scroll;
+      @apply --layout-flex;
+    }
+
+    #controls {
+      margin: 10px;
+    }
+
+    .edit {
+      margin-left: auto;
+    }
+    </style>
+    <div id="label">Speakers</div>
+    <div id="scrollWrapper">
+      <div id="speakers">
+        <template is="dom-repeat" items="[[speakers]]" as="speaker" mutable-data>
+          <paper-item>
+            <speaker-item value="[[speaker]]"></speaker-item>
+            <paper-button class="edit" raised on-tap="updateSpeaker">Edit</paper-button>
+          </paper-item>
+        </template>
+      </div>
+      <div id="empty">There are no speakers! Oh No!</div>
+    </div>
+    <div id="controls">
+      <paper-button id="createSpeaker" raised on-tap="createSpeaker">Create Speaker</paper-button>
+    </div>
+    <paper-dialog id="editSpeaker" with-backdrop>
+      <speaker-edit id="editor"></speaker-edit>
+    </paper-dialog>
+  </template>
+  <script src="tpcig-speaker-management.js"></script>
+</dom-module>

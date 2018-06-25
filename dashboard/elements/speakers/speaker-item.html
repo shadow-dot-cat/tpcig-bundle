@@ -1,0 +1,17 @@
+<dom-module id="speaker-item">
+  <template>
+    <style>
+      #info {
+        font-size: 14px;
+        color: darkgray;
+      }
+    </style>
+    <div id="name">
+      [[value.name]]
+    </div>
+    <div id="info">
+      @[[value.twitter]] / [[value.website]]
+    </div>
+  </template>
+  <script src="speaker-item.js"></script>
+</dom-module>

@@ -1,0 +1,60 @@
+<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+
+<dom-module id="speaker-edit">
+  <template>
+    <style>
+    :host {
+      @apply --layout-vertical;
+      @apply --layout-center;
+    }
+
+    #title {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .row {
+      @apply --layout-horizontal;
+      @apply --layout-center;
+    }
+
+    .row > :not(:last-child) {
+      margin-right: 12px;
+    }
+
+    .row > :not(:first-child) {
+      margin-left: 12px;
+    }
+
+    #buttons {
+      margin-top: 16px;
+    }
+    </style>
+    <div id="title">[[title]]</div>
+    <div class="row">
+      <paper-input
+        label="Name"
+        value="{{name}}"
+        always-float-label>
+      </paper-input>
+      <paper-input
+        label="Twitter Account"
+        value="{{twitter}}"
+        always-float-label>
+      </paper-input>
+      <paper-input
+        label="Website"
+        value="{{website}}"
+        always-float-label>
+      </paper-input>
+    </div>
+    <div id="buttons" class="row">
+      <paper-button id="save" on-tap="saveSpeaker" raised>Save</paper-button>
+      <paper-button dialog-dismiss raised autofocus>Cancel</paper-button>
+    </div>
+  </template>
+  <script src="speaker-edit.js"></script>
+</dom-module>

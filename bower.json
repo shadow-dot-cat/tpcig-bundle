@@ -3,6 +3,11 @@
   "dependencies": {
     "polymer": "^2.6.0",
     "iron-image": "^2.2.1",
-    "gsap": "^2.0.1"
+    "gsap": "^2.0.1",
+    "iron-flex-layout": "^2.0.3",
+    "webcomponentsjs": "^2.0.2"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.1.0"
   }
 }
