@@ -17,6 +17,8 @@ module.exports = function (nodecg) {
   require('./room');
   require('./schedule');
 
+  require('./csv');
+
   nodecg.listenFor('ping', message => {
     nodecg.log.info(message);
   });

@@ -1,0 +1,30 @@
+<link rel="import" href="../../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+
+
+<dom-module id="tpcig-csv-upload">
+  <template>
+    <style>
+    </style>
+    <iron-autogrow-textarea value="{{csv}}" maxrows="20"></iron-autogrow-textarea>
+    <paper-button id="save" on-tap="saveCsv" raised>Upload</paper-button>
+  </template>
+  <script>
+  class TpcigCsvUpload extends Polymer.Element {
+    static get is() { return 'tpcig-csv-upload' }
+
+    static get properties() {
+      return {
+        csv: String
+      };
+    }
+
+    saveCsv() {
+      nodecg.sendMessage('csvImport', this.csv, (err, msg) => {
+        console.log('csv done?', err, msg);
+      });
+    }
+  }
+
+  customElements.define(TpcigCsvUpload.is, TpcigCsvUpload);
+  </script>
+</dom-module>

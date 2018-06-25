@@ -51,7 +51,7 @@ function updateRoomById(id, update) {
     return element.id === id;
   });
   if ( roomIndex > -1 ) {
-    roomRep.value[roomIndex] = update;
+    roomRep.value[roomIndex] = Object.assign({}, roomRep.value[roomIndex], update);
     return roomRep.value[roomIndex];
   } else {
     return undefined;

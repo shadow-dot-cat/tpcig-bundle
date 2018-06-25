@@ -68,5 +68,9 @@
       }
     ]
   },
-  "repository": "https://github.com/nodecg/nodecg.git"
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "dependencies": {
+    "csv": "^3.1.0",
+    "moment": "^2.22.2"
+  }
 }

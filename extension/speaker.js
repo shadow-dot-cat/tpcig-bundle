@@ -75,7 +75,7 @@ function updateSpeakerById(id, update) {
     return element.id === id;
   });
   if ( speakerIndex > -1 ) {
-    speakerRep.value[speakerIndex] = update;
+    speakerRep.value[speakerIndex] = Object.assign({}, speakerRep.value[speakerIndex], update);;
     return speakerRep.value[speakerIndex];
   } else {
     return undefined;

@@ -58,7 +58,7 @@ function updateScheduleById(id, update) {
     return element.id === id;
   });
   if ( scheduleIndex > -1 ) {
-    scheduleRep.value[scheduleIndex] = update;
+    scheduleRep.value[scheduleIndex] = Object.assign({}, scheduleRep.value[scheduleIndex], update);;
     return scheduleRep.value[scheduleIndex];
   } else {
     return undefined;
