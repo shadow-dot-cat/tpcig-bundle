@@ -30,7 +30,6 @@
 
     updateSpeaker(item) {
       const editor = this.$.editor;
-      console.log(item);
       editor.loadSpeaker(item.model.speaker);
       this.$.editSpeaker.open();
     }

@@ -15,6 +15,7 @@
     ready() {
       super.ready();
 
+      this.filter = true;
       scheduleRep.on('change', newVal => {
         this.$.empty.style.display = newVal.length > 0 ? 'none' : 'flex';
         this.schedules = newVal;
@@ -33,6 +34,35 @@
       console.log(item);
       editor.loadSchedule(item.model.schedule);
       this.$.editSchedule.open();
+    }
+
+    _sortSchedules(a, b) {
+      if ( !b.start_time ) {
+        return -1;
+      } else if ( !a.start_time ) {
+        return 1;
+      }
+      return moment(a.start_time).diff(moment(b.start_time));
+    }
+
+    toggleFilter() {
+      this.filter = !this.filter;
+      console.log("toggle", this.filter);
+      this.notifyPath('schedules');
+    }
+
+    _isInFuture(item) {
+      if ( !this.filter ) {
+        return true;
+      }
+      if( !item.end_time ) {
+        return true;
+      }
+      let end_time = moment(item.end_time);
+      if ( moment(item.end_time).diff(moment()) >= 0 ) {
+        return true;
+      }
+      return false;
     }
   }
   customElements.define(TpcigScheduleManagement.is, TpcigScheduleManagement);

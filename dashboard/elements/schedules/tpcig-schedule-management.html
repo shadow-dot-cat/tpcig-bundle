@@ -38,11 +38,19 @@
     .edit {
       margin-left: auto;
     }
+
+    #toggleFilter {
+      background-color: lightblue;
+    }
+
+    #toggleFilter[active] {
+      background-color: lightgreen;
+    }
     </style>
     <div id="label">Schedules</div>
     <div id="scrollWrapper">
       <div id="schedules">
-        <template is="dom-repeat" items="[[schedules]]" as="schedule" mutable-data>
+        <template is="dom-repeat" items="[[schedules]]" as="schedule" sort="_sortSchedules" filter="_isInFuture" observe="start_time" mutable-data>
           <paper-item>
             <paper-item-body>
               <schedule-item value="[[schedule]]"></schedule-item>
@@ -55,6 +63,7 @@
     </div>
     <div id="controls">
       <paper-button id="createSchedule" raised on-tap="createSchedule">Create Schedule</paper-button>
+      <paper-button id="toggleFilter" toggles raised on-tap="toggleFilter">Show/Hide Past</paper-button>
     </div>
     <paper-dialog id="editSchedule" with-backdrop>
       <schedule-edit id="editor"></schedule-edit>

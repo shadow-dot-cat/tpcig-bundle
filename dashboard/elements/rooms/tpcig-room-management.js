@@ -30,7 +30,6 @@
 
     updateRoom(item) {
       const editor = this.$.editor;
-      console.log(item);
       editor.loadRoom(item.model.room);
       this.$.editRoom.open();
     }

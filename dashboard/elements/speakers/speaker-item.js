@@ -11,7 +11,6 @@ class SpeakerItem extends Polymer.Element {
   }
 
   _valueChanged(newValue) {
-    console.log(newValue);
 		Polymer.dom(this.$.body).innerHTML = newValue.text;
 	}
 }
