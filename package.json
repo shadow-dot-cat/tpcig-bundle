@@ -70,7 +70,9 @@
   },
   "repository": "https://github.com/nodecg/nodecg.git",
   "dependencies": {
+    "bower-npm-resolver": "^0.9.1",
     "csv": "^3.1.0",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "nodecg-utility-obs": "^4.4.0"
   }
 }

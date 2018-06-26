@@ -11,7 +11,8 @@
     "datetime-picker": "fooloomanzoo/datetime-picker#^2.9.1",
     "paper-item": "PolymerElements/paper-item#^2.1.1",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^2.1.0",
-    "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea#^2.2.0"
+    "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea#^2.2.0",
+    "nodecg-widget-obs": "npm:nodecg-widget-obs#^4.5.0"
   },
   "resolutions": {
     "webcomponentsjs": "^v1.1.0"
