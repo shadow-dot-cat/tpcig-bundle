@@ -9,13 +9,14 @@
   <script src="/bower_components/moment/moment.js"></script>
   <script src="/bower_components/moment/locale/en-gb.js"></script>
   <script>moment.locale('en-GB');</script>
-  
+
   <link rel="import" href="/bower_components/neon-animation/web-animations.html">
   <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout-classes.html">
   <link rel="import" href="elements/speakers/tpcig-speaker-management.html">
   <link rel="import" href="elements/rooms/tpcig-room-management.html">
   <link rel="import" href="elements/schedules/tpcig-schedule-management.html">
   <link rel="import" href="elements/csv/tpcig-csv-upload.html">
+  <link rel="import" href="elements/obs/tpcig-obs-management.html">
 
   <custom-style>
     <style include="iron-flex iron-flex-alignment">
@@ -85,7 +86,8 @@
         <tpcig-schedule-management class="bordered fill"></tpcig-schedule-management>
       </div>
       <div id="rightColumn" class="column">
-        <tpcig-csv-upload class="bordered fill"></tpcig-csv-upload>
+        <tpcig-csv-upload class="bordered"></tpcig-csv-upload>
+        <tpcig-obs-management class="bordered fill"></tpcig-obs-management>
       </div>
     </div>
   </div>

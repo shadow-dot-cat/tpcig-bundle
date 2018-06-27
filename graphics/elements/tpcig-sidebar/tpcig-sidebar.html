@@ -1,3 +1,5 @@
+<link rel="import" href="/bundles/tpcig-bundle/bower_components/iron-ajax/iron-ajax.html">
+
 <dom-module id="tpcig-sidebar">
   <template>
     <style>
@@ -27,12 +29,15 @@
         margin-bottom: 15px;
       }
     </style>
+    <iron-ajax auto url="/obs-register" handle-as="json" last-response="{{obsIdentity}}"></iron-ajax>
 
     <div id="header" class="block">
+      [[headerText]]
     </div>
     <div id="screen" class="block">
     </div>
     <div id="info" class="block">
+      [[roomName]]
     </div>
 </template>
 <script src="tpcig-sidebar.js"></script>

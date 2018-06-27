@@ -1,0 +1,61 @@
+<link rel="import" href="/bower_components/nodecg-replicant/nodecg-replicant.html">
+<link rel="import" href="/bower_components/polymer/lib/mixins/mutable-data.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="obs-item.html">
+<link rel="import" href="obs-edit.html">
+
+<dom-module id="tpcig-obs-management">
+  <template>
+    <style>
+    :host {
+      @apply --layout-vertical;
+    }
+
+    #label {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      background-color: #C4C4C4;
+      height: 29px;
+      @apply --layout-horizontal;
+      @apply --layout-center-center;
+    }
+
+    #scrollWrapper {
+      margin: 10px;
+      padding-right: 12px;
+      overflow-y: scroll;
+      @apply --layout-flex;
+    }
+
+    #controls {
+      margin: 10px;
+    }
+
+    .edit {
+      margin-left: auto;
+    }
+    </style>
+    <div id="label">Obs Instances</div>
+    <div id="scrollWrapper">
+      <div id="obss">
+        <template is="dom-repeat" items="[[obss]]" as="obs" mutable-data>
+          <paper-item>
+            <paper-item-body>
+              <obs-item value="[[obs]]"></obs-item>
+            </paper-item-body>
+            <paper-button class="edit" raised on-tap="updateObs">Edit</paper-button>
+          </paper-item>
+        </template>
+      </div>
+      <div id="empty">There are no obss! Oh No!</div>
+    </div>
+    <paper-dialog id="editRoom" with-backdrop>
+      <obs-edit id="editor"></obs-edit>
+    </paper-dialog>
+  </template>
+  <script src="tpcig-obs-management.js"></script>
+</dom-module>

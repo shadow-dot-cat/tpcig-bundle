@@ -41,6 +41,14 @@
         "file": "sponsors.html",
         "headerColor": "#2d4e8a",
         "workspace": "Stuff"
+      },
+      {
+        "name": "obs-instances",
+        "title": "OBS Instances",
+        "width": 2,
+        "file": "obs-instances.html",
+        "headerColor": "#2d4e8a",
+        "workspace": "Stuff"
       }
     ],
     "graphics": [
@@ -74,5 +82,8 @@
     "csv": "^3.1.0",
     "moment": "^2.22.2",
     "nodecg-utility-obs": "^4.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.0.1"
   }
 }
