@@ -1,4 +1,9 @@
 @import 'reset.css';
+@import '../fonts/fonts.css';
+
+body {
+  font-family: 'Lato', sans-serif; 
+}
 
 #container {
   position: absolute;
