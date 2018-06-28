@@ -23,21 +23,39 @@
       }
       #screen {
         height: calc((500px / 16) * 9);
+        text-align: center;
       }
       #info {
         flex-grow: 1;
         margin-bottom: 15px;
       }
+
+      #logo {
+        max-width: 90%;
+        max-height: 90%;
+        margin: 2.5%;
+      }
+
+      .content {
+        text-align: center;
+        padding: 1em;
+      }
     </style>
     <iron-ajax auto url="/obs-register" handle-as="json" last-response="{{obsIdentity}}"></iron-ajax>
 
     <div id="header" class="block">
-      [[headerText]]
+      <div class="content">
+        [[headerText]]
+      </div>
     </div>
     <div id="screen" class="block">
+      <img id="logo" src="/bundles/tpcig-bundle/graphics/elements/images/lrg-conf-logo.png">
     </div>
     <div id="info" class="block">
-      [[roomName]]
+      <div class="content">
+        [[roomName]]
+      </div>
+    </div>
     </div>
 </template>
 <script src="tpcig-sidebar.js"></script>
