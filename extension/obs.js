@@ -11,11 +11,16 @@ const obs = new OBSUtility(nodecg);
 
 app.get('/obs-register', (req, res) => {
   let message = '';
-  if ( obsInstanceRep.value[req.ip] === undefined ) {
-    obsInstanceRep.value[req.ip] = 'new_instance';
+  let instance = obsInstanceRep.value[req.ip];
+  if ( instance === undefined ) {
+    obsInstanceRep.value[req.ip] = {
+      ip: req.ip,
+      password: null,
+      room_id: null,
+      is_configured: false,
+      is_obs: false
+    };
     message = 'New OBS Instance Created';
-  } else if ( typeof obsInstanceRep.value[req.ip] === 'string' ) {
-    message = 'OBS Instance Not Set Up';
   } else {
     message = 'Got OBS Information';
   }
@@ -35,13 +40,20 @@ nodecg.mount(app);
 Data should be:
 
 * ip
-* username
 * password
 * room_id
+* is_configured => default false
+* is_obs => default false
 */
 nodecg.listenFor('obsInstanceRead', (data, cb) => {
   nodecg.log.info('Reading Instance Info', data);
   cb(null, obsInstanceRep.value[data]);
+});
+
+nodecg.listenFor('obsInstanceDelete', (data, cb) => {
+  nodecg.log.info('Deleting OBS Instance', data);
+  delete obsInstanceRep.value[data];
+  cb(null, true);
 });
 
 nodecg.listenFor('setObsRoom', (data, cb) => {

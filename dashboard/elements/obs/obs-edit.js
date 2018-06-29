@@ -36,6 +36,12 @@ class TpcigObsEditor extends Polymer.MutableData(Polymer.Element) {
     obsInstanceRep.value[this.obs_id] = obs;
     this.closest('paper-dialog').close();
   }
+
+  deleteObs() {
+    nodecg.sendMessage('obsInstanceDelete', this.obs_id, (err, msg) => {
+      this.closest('paper-dialog').close();
+    })
+  }
 }
 
 customElements.define(TpcigObsEditor.is, TpcigObsEditor);

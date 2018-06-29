@@ -34,6 +34,10 @@
     #buttons {
       margin-top: 16px;
     }
+
+    #delete {
+      background-color: var(--paper-red-500);
+    }
     </style>
     <div id="title">[[title]]</div>
     <div class="row">
@@ -57,6 +61,7 @@
       </paper-input>
     </div>
     <div id="buttons" class="row">
+      <paper-button id="delete" on-tap="deleteObs" raised>Delete</paper-button>
       <paper-button id="save" on-tap="saveObs" raised>Save</paper-button>
       <paper-button dialog-dismiss raised autofocus>Cancel</paper-button>
     </div>
