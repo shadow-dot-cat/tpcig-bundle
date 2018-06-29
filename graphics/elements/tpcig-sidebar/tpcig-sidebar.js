@@ -3,6 +3,8 @@
   const roomRep = nodecg.Replicant('room');
   const currentRep = nodecg.Replicant('currentTalks');
 
+  const itemArray = ['test-one', 'test-two', 'test-three'];
+
   class TpcigSidebar extends Polymer.Element {
     static get is() { return "tpcig-sidebar" }
     static get properties() {
@@ -48,6 +50,20 @@
           this._updateRoom(this.roomId);
         }
       });
+
+console.log('content', this.$.content);
+      setInterval(() => {this.loopArray()}, 2000);
+    }
+
+    loopArray() {
+      let next = itemArray.shift();
+      console.log('looping', next);
+      itemArray.push(next);
+      let nextElement = document.createElement(next);
+      console.log('content', this.$.content);
+      console.log('next Element', nextElement);
+      this.$.content.innerHTML = '';
+      this.$.content.appendChild(nextElement);
     }
 
     // Update the IP address on connection
