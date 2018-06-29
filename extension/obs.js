@@ -39,6 +39,11 @@ Data should be:
 * password
 * room_id
 */
+nodecg.listenFor('obsInstanceRead', (data, cb) => {
+  nodecg.log.info('Reading Instance Info', data);
+  cb(null, obsInstanceRep.value[data]);
+});
+
 nodecg.listenFor('setObsRoom', (data, cb) => {
   nodecg.log.info('Setting OBS Instance Room');
   if ( obsInstanceRep.value[data.ip] !== undefined ) {
