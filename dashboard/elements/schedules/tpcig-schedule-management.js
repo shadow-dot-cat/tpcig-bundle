@@ -36,6 +36,12 @@
       this.$.editSchedule.open();
     }
 
+    refreshSchedule() {
+      nodecg.sendMessage('refreshActData', (err, data) => {
+        console.log('refreshed', err, data);
+      });
+    }
+
     _sortSchedules(a, b) {
       if ( !b.start_time ) {
         return -1;

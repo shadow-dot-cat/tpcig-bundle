@@ -1,8 +1,9 @@
 'use strict';
 
-const csv = require('csv');
 const moment =require('moment');
 const uuid = require('uuid/v4');
+const http = require('http');
+const url = require('url');
 
 const nodecg = require('./util/nodecg-api-context').get();
 
@@ -10,24 +11,37 @@ const roomRep = nodecg.Replicant('room');
 const scheduleRep = nodecg.Replicant('schedule');
 const speakerRep = nodecg.Replicant('speaker');
 
-nodecg.listenFor('csvImport', (data, cb) => {
-  parseCsv(data, cb);
-});
+nodecg.listenFor('refreshActData', (data, cb) => {
+  getActData(data, cb);
+})
 
-function parseCsv(data, cb) {
-  csv.parse(data, {
-    columns: true
-  }, (...args) => {
-    parseData( cb, args[1] );
+function getActData(data, cb) {
+  const apiTalkUrl = url.format({
+    protocol: 'http',
+    hostname: 'act.perlconference.org',
+    pathname: '/tpc-2018-glasgow/api/get_talks',
+    query: {
+      api_key: nodecg.bundleConfig.actApiKey,
+      fields: 'user_id,room,talk_id,title,lightning,duration,datetime,speaker'
+    }
+  });
+  http.get(apiTalkUrl, (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      parseData(cb, JSON.parse(data));
+    });
+  }).on('error', (err) => {
+    cb(err.message);
   });
 }
 
 /*
 ## Speaker Keys
 * user_id => act_id
-* first_name
-* last_name
-* nick_name
+* speaker => name
 (create new key display_name)
 
 ## Room
@@ -47,9 +61,7 @@ function parseData(cb, data) {
   data.forEach((e) => {
     findOrCreateActSpeaker(e.user_id, {
       act_id: e.user_id,
-      first_name: e.first_name,
-      last_name: e.last_name,
-      nick_name: e.nick_name
+      speaker: e.speaker
     });
     findOrCreateActRoom(e.room, {
       act_id: e.room
@@ -67,23 +79,37 @@ function parseData(cb, data) {
   cb( null, data );
 }
 
-function findOrCreateActSpeaker(act_id, data) {
-  let index = speakerRep.value.findIndex((element) => {
+function getScheduleIndexByActId(act_id) {
+  return scheduleRep.value.findIndex((element) => {
     return element.act_id === act_id;
   });
+}
+
+function getSpeakerIndexByActId(act_id) {
+  return speakerRep.value.findIndex((element) => {
+    return element.act_id === act_id;
+  });
+}
+
+function getRoomIndexByActId(act_id) {
+  return roomRep.value.findIndex((element) => {
+    return element.act_id === act_id;
+  });
+}
+
+function findOrCreateActSpeaker(act_id, data) {
+  let index = getSpeakerIndexByActId(act_id);
   if ( index > -1 ) {
     // data from Act wins, but doesnt update name in case already modified
     speakerRep.value[index] = Object.assign({}, speakerRep.value[index], data);
   } else {
-    let new_speaker = Object.assign({id: uuid(), name: `${data.first_name} ${data.last_name}`}, data);
+    let new_speaker = Object.assign({id: uuid(), name: data.speaker}, data);
     speakerRep.value.push(new_speaker);
   }
 }
 
 function findOrCreateActRoom(act_id, data) {
-  let index = roomRep.value.findIndex((element) => {
-    return element.act_id === act_id;
-  });
+  let index = getRoomIndexByActId(act_id);
   if ( index > -1 ) {
     roomRep.value[index] = Object.assign({}, roomRep.value[index], data);
   } else {
@@ -93,49 +119,31 @@ function findOrCreateActRoom(act_id, data) {
 }
 
 function findOrCreateActTalk(act_id, data) {
-  let index = scheduleRep.value.findIndex((element) => {
-    return element.act_id === act_id;
-  });
-  let spk_index = speakerRep.value.findIndex((element) => {
-    return element.act_id === data.speaker_id;
-  });
-  if ( spk_index > -1 ) {
-    data.speaker_id = speakerRep.value[spk_index].id;
-  } else {
-    delete data.speaker_id;
-  }
+  const index      = getScheduleIndexByActId(act_id);
+  const spk_index  = getSpeakerIndexByActId(data.speaker_id);
+  const room_index = getRoomIndexByActId(data.room);
+
+  if ( spk_index > -1 ) { data.speaker_id = speakerRep.value[spk_index].id }
+  else { delete data.speaker_id }
+
+  if ( room_index > -1 ) { data.room_id = roomRep.value[room_index].id }
+  else { delete data.room_id }
+
   let start_time;
   let end_time;
-  console.log(data.datetime);
-  console.log(data.duration);
-  if ( data.datetime !== '' ) {
-    start_time = moment(data.datetime);
-  }
-  if ( (data.duration !== '') && (start_time !== undefined) ) {
+  if ( data.datetime !== undefined ) { start_time = moment(data.datetime, 'X') }
+
+  if ( ( data.duration !== undefined ) && ( start_time !== undefined ) ) {
     end_time = start_time.clone();
     end_time.add(data.duration, 'minutes');
   }
-  console.log(start_time);
-  console.log(end_time);
-  let room_index = roomRep.value.findIndex((element) => {
-    return element.act_id === data.room;
-  });
-  if ( room_index > -1 ) {
-    data.room_id = roomRep.value[room_index].id;
-  } else {
-    delete data.room_id;
-  }
+
+  if ( start_time ) { data.start_time = start_time.toISOString() }
+  if ( end_time ) { data.end_time = end_time.toISOString() }
+
   if ( index > -1 ) {
     scheduleRep.value[index] = Object.assign({}, scheduleRep.value[index], data);
-    if ( start_time ) {
-      scheduleRep.value[index].start_time = start_time.toISOString();
-    }
-    if ( end_time ) {
-      scheduleRep.value[index].end_time = end_time.toISOString();
-    }
   } else {
-
-    // its all milliseconds...
     let new_schedule = Object.assign({
       id: uuid()
     }, data);
