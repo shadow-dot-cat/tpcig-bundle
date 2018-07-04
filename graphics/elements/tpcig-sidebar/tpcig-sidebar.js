@@ -17,7 +17,6 @@
           type: Object,
           observer: '_updateIdentity'
         },
-        headerText: String,
         roomId: {
           type: String,
           observer: '_updateRoom'
@@ -30,13 +29,13 @@
       super.ready();
 
       this.isConfigured = false;
-      this.headerText = 'Unconfigured Room';
       this.roomId = '';
       this.myIp = '';
 
+      this._setHeaderContent('tpcig-header-ip', {ip: 'No IP Found Yet'});
+
       // Update the OBS info as needed
       obsInstanceRep.on('change', newVal => {
-        console.log('Instance Info Change', newVal);
         // If we have an IP and this instance has been configured, set room id.
         if ( this.myIp !== '' ) {
           this._updateIp(this.myIp);
@@ -45,44 +44,47 @@
 
       // Update things when roomRep is changed eg. name
       roomRep.on('change', newVal => {
-        console.log('Room Info Change', newVal);
         if (this.roomId !== '') {
           this._updateRoom(this.roomId);
         }
       });
-
-console.log('content', this.$.content);
       setInterval(() => {this.loopArray()}, 2000);
     }
 
     loopArray() {
       let next = itemArray.shift();
-      console.log('looping', next);
       itemArray.push(next);
       let nextElement = document.createElement(next);
-      console.log('content', this.$.content);
-      console.log('next Element', nextElement);
-      this.$.content.innerHTML = '';
-      this.$.content.appendChild(nextElement);
+      this.$.infoContent.innerHTML = '';
+      this.$.infoContent.appendChild(nextElement);
+    }
+
+    _setHeaderContent(name, args) {
+      let element = document.createElement(name);
+      if ( args !== undefined ) {
+        Object.keys(args).forEach(key => {
+          element[key] = args[key];
+        });
+      }
+      this.$.headerContent.innerHTML = '';
+      this.$.headerContent.appendChild(element);
     }
 
     // Update the IP address on connection
     _updateIdentity(newVal, oldVal) {
-      console.log('Updating Identity', newVal);
       if ( ! newVal ) {
         return;
       }
       if ( newVal.ip ) {
         this.myIp = newVal.ip;
-        this.headerText = 'IP Address: ' + this.myIp;
+        this._setHeaderContent('tpcig-header-ip', {ip: this.myIp});
       } else {
-        this.headerText = 'No IP Address Received!';
+        this._setHeaderContent('tpcig-header-ip', {ip: 'No IP Address Received!'});
       }
     }
 
     // If the room ID is changed, update the name of the room as needed
     _updateRoom(newVal, oldVal) {
-      console.log('Updating Room', newVal);
       if ( !newVal ) {
         return;
       }
@@ -94,7 +96,6 @@ console.log('content', this.$.content);
     }
 
     _updateIp(newVal, oldVal) {
-      console.log('Updating Ip', newVal);
       if ( !newVal ) {
         return;
       }

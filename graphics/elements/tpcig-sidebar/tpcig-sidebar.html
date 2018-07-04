@@ -3,6 +3,7 @@
 <link rel="import" href="elements/test2.html">
 <link rel="import" href="elements/test3.html">
 <link rel="import" href="elements/tpcig-sidebar-room-name.html">
+<link rel="import" href="elements/tpcig-header-ip.html">
 
 <dom-module id="tpcig-sidebar">
   <template>
@@ -40,16 +41,21 @@
         margin: 2.5%;
       }
 
-      #content {
+      #headerContent {
         text-align: center;
-        padding: 1em;
+        width: 100%;
+        height: 100%;
+      }
+      #infoContent {
+        text-align: center;
+        width: 100%;
+        height: 100%;
       }
     </style>
     <iron-ajax auto url="/obs-register" handle-as="json" last-response="{{obsIdentity}}"></iron-ajax>
 
     <div id="header" class="block">
-      <div class="content">
-        [[headerText]]
+      <div id="headerContent">
       </div>
     </div>
     <div id="screen" class="block">
@@ -57,7 +63,7 @@
     </div>
     <div id="info" class="block">
       <tpcig-sidebar-room-name name="[[roomName]]"></tpcig-sidebar-room-name>
-      <div id="content">
+      <div id="infoContent">
       </div>
     </div>
     </div>
