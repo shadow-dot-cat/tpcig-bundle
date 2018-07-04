@@ -121,7 +121,7 @@ function findOrCreateActRoom(act_id, data) {
 function findOrCreateActTalk(act_id, data) {
   const index      = getScheduleIndexByActId(act_id);
   const spk_index  = getSpeakerIndexByActId(data.speaker_id);
-  const room_index = getRoomIndexByActId(data.room);
+  const room_index = getRoomIndexByActId(data.room_id);
 
   if ( spk_index > -1 ) { data.speaker_id = speakerRep.value[spk_index].id }
   else { delete data.speaker_id }
