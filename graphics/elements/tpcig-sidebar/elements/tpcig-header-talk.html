@@ -1,0 +1,32 @@
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="tpcig-header-talk">
+  <template>
+    <style>
+    :host {
+      height: 100%;
+      @apply --layout-vertical;
+      @apply --layout-center-center;
+    }
+      #speaker {
+        font-size: 250%;
+        font-weight: bold;
+      }
+
+      #title {
+        font-size: 200%;
+      }
+
+      #social {
+        font-size: 150%;
+        @apply --layout-horizontal;
+        @apply --layout-center-center;
+      }
+    </style>
+    <div>
+      <div id="speaker">[[speaker]]</div>
+      <div id="title">[[talk]]</div>
+    </div>
+  </template>
+  <script src="tpcig-header-talk.js"></script>
+</dom-module>

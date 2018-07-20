@@ -1,6 +1,8 @@
 (() => {
   const obsInstanceRep = nodecg.Replicant('obsInstance');
   const roomRep = nodecg.Replicant('room');
+  const scheduleRep = nodecg.Replicant('schedule');
+  const speakerRep = nodecg.Replicant('speaker');
   const currentRep = nodecg.Replicant('currentTalks');
 
   const itemArray = ['test-one', 'test-two', 'test-three'];
@@ -22,6 +24,10 @@
           observer: '_updateRoom'
         },
         roomName: String,
+        scheduleId: {
+          type: String,
+          observer: '_showCurrentTalkHeader'
+        },
       };
     }
 
@@ -48,7 +54,53 @@
           this._updateRoom(this.roomId);
         }
       });
+
+      scheduleRep.on('change', newVal => {
+        if ( this.scheduleId !== null ) {
+          this._showCurrentTalkHeader(this.scheduleId);
+        }
+      })
+
+      speakerRep.on('change', newVal => {
+        if ( this.scheduleId !== null ) {
+          this._showCurrentTalkHeader(this.scheduleId);
+        }
+      })
+
+      currentRep.on('change', newVal => {
+        this.scheduleId == newVal[this.roomId];
+        this._showCurrentTalkHeader(newVal[this.roomId]);
+      })
+
       setInterval(() => {this.loopArray()}, 2000);
+    }
+
+    _showCurrentTalkHeader(id) {
+      // If theres nothing on (its a new room or something), do nothing
+      if ( id === null ) {
+        return;
+      }
+      // If its a break, set the header of break
+      if ( id === 'break' ) {
+        this._setHeaderContent('tpcig-header-break');
+        return;
+      }
+      // If its a talk, set the header as needed
+      nodecg.sendMessage('scheduleRead', id, (err, sch) => {
+        if ( sch === null ) {
+          return;
+        }
+        this.scheduleId = sch.id;
+        nodecg.sendMessage('speakerRead', sch.speaker_id, (err, spk) => {
+          this.speakerId = spk.id;
+          this._setHeaderContent('tpcig-header-talk', {
+            talk: sch.title,
+            speaker: spk.name,
+            twitter: spk.twitter,
+            website: spk.website
+          });
+        });
+      });
     }
 
     loopArray() {
