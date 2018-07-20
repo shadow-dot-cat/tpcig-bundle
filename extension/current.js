@@ -19,6 +19,7 @@ nodecg.listenFor('roomOrderSet', (data, cb) => {
 
 function setCurrentTalk(data) {
   currentTalksRep.value[data.room_id] = data.schedule_id;
+  return true;
 }
 
 function setRoomOrder(data) {

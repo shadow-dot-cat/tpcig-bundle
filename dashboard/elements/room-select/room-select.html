@@ -1,0 +1,31 @@
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+
+<dom-module id="room-select">
+  <template>
+    <style>
+    #label {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      background-color: #C4C4C4;
+      height: 29px;
+      @apply --layout-horizontal;
+      @apply --layout-center-center;
+    }
+    </style>
+    <div id="label">Room Select</div>
+    <paper-dropdown-menu label="Room">
+      <paper-listbox slot="dropdown-content"
+                     attr-for-selected="option"
+                     selected="{{room_id}}">
+        <template is="dom-repeat" items="[[rooms]]">
+          <paper-item option="[[item.id]]">[[item.name]]</paper-item>
+        </template>
+      </paper-listbox>
+    </paper-dropdown-menu>
+  </template>
+  <script src="room-select.js"></script>
+</dom-module>

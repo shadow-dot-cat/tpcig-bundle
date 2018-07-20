@@ -19,6 +19,7 @@ module.exports = function (nodecg) {
   require('./speaker');
   require('./room');
   require('./schedule');
+  require('./current');
 
   require('./csv');
   require('./obs');

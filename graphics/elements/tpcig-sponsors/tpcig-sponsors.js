@@ -1,16 +1,23 @@
-(function () {
+(() => {
   'use strict';
 
   const FADE_DURATION = 0.66;
   const FADE_OUT_EASE = Power1.easeIn;
   const FADE_IN_EASE = Power1.easeOut;
-  const HOLD_DURATION = 20;
+  const HOLD_DURATION = 2;
 
-  Polymer({
-    is: 'tpcig-sponsors',
+  class TpcigSponsors extends Polymer.Element {
+    static get is() { return "tpcig-sponsors" };
+    static get properties() {
+      return {
+        replicant: String
+      };
+    }
 
     ready() {
-      let sponsors = nodecg.Replicant('assets:tpcig-sponsors');
+      super.ready();
+      const repFullName = 'assets:' + this.replicant;
+      let sponsors = nodecg.Replicant(repFullName);
 
       sponsors.on('change', newVal => {
         this.sponsors = newVal;
@@ -29,7 +36,7 @@
 
       // Cycle through sponsor logos every this.duration seconds
       setInterval(this.nextSponsor.bind(this), HOLD_DURATION * 1000);
-    },
+    }
 
     nextSponsor() {
       // If there's no images, do nothing
@@ -75,5 +82,6 @@
         ease: FADE_IN_EASE
       }, 'start');
     }
-  });
+  };
+  customElements.define(TpcigSponsors.is, TpcigSponsors);
 })();

@@ -1,0 +1,46 @@
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../schedules/schedule-item.html">
+
+<dom-module id="room-schedule">
+  <template>
+    <style>
+    :host {
+      @apply --layout-vertical;
+    }
+
+    #label {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      background-color: #C4C4C4;
+      height: 29px;
+      @apply --layout-horizontal;
+      @apply --layout-center-center;
+    }
+
+    #scrollWrapper {
+      margin: 10px;
+      padding-right: 12px;
+      overflow-y: scroll;
+      @apply --layout-flex;
+    }
+    </style>
+    <div id="label">Room Schedule</div>
+    <div id="scrollWrapper">
+      <div id="schedules">
+        <template id="scheduleList" is="dom-repeat" items="[[schedules]]" as="schedule" sort="_sortSchedules" filter="_isInRoom" observe="start_time" mutable-data>
+          <paper-item>
+            <paper-item-body>
+              <schedule-item value="[[schedule]]"></schedule-item>
+            </paper-item-body>
+            <paper-button class="edit" raised on-tap="setCurrent">Set Current</paper-button>
+          </paper-item>
+        </template>
+      </div>
+    </div>
+  </template>
+  <script src="room-schedule.js"></script>
+</dom-module>
