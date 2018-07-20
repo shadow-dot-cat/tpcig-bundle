@@ -143,6 +143,8 @@
       if( newVal !== '' ) {
         nodecg.sendMessage('roomRead', newVal, (err, data) => {
           this.roomName = data.name;
+          this.scheduleId == currentRep.value[data.id];
+          this._showCurrentTalkHeader(currentRep.value[data.id]);
         });
       }
     }
