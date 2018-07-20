@@ -17,25 +17,36 @@
     ready() {
       super.ready();
 
+      this.filter = true;
       scheduleRep.on('change', newVal => {
         this.schedules = newVal;
       });
     }
 
     setCurrent(item) {
-      console.log(item.model.schedule);
       const schedule = item.model.schedule;
       nodecg.sendMessage('currentTalkSet', {
         room_id: schedule.room_id,
         schedule_id: schedule.id
       }, (err, msg) => {
-        console.log(err, msg);
+      });
+    }
+
+    toggleFilter() {
+      this.filter = !this.filter;
+      this.$.scheduleList.render();
+    }
+
+    setBreak() {
+      nodecg.sendMessage('currentTalkSet', {
+        room_id: this.activeRoom.id,
+        schedule_id: 'break'
+      }, (err, msg) => {
       });
     }
 
     _roomChanged(newVal) {
       this.$.scheduleList.render();
-      console.log(newVal);
     }
 
     _sortSchedules(a, b) {
@@ -58,9 +69,23 @@
       }
       if ( item.room_id === this.activeRoom.id ) {
         console.log('room match');
-        return true;
+        return this._isToday(true, item);
       }
       console.log('no room match');
+      return false;
+    }
+
+    _isToday(prev, item) {
+      console.log(item);
+      if ( !this.filter ) {
+        return prev;
+      }
+      if( !item.start_time ) {
+        return prev;
+      }
+      if ( moment().isSame(item.start_time, 'day') ) {
+        return prev;
+      }
       return false;
     }
 

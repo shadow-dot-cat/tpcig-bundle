@@ -2,6 +2,7 @@
 <link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../schedules/schedule-item.html">
 
 <dom-module id="room-schedule">
@@ -27,6 +28,18 @@
       overflow-y: scroll;
       @apply --layout-flex;
     }
+
+    .edit {
+      margin-left: auto;
+    }
+
+    #toggleFilter {
+      background-color: lightgreen;
+    }
+
+    #toggleFilter[active] {
+      background-color: lightgray;
+    }
     </style>
     <div id="label">Room Schedule</div>
     <div id="scrollWrapper">
@@ -41,6 +54,8 @@
         </template>
       </div>
     </div>
+    <paper-button id="toggleFilter" toggles raised on-tap="toggleFilter">Show Today Only</paper-button>
+    <paper-button raised on-tap="setBreak">Break</paper-button>
   </template>
   <script src="room-schedule.js"></script>
 </dom-module>

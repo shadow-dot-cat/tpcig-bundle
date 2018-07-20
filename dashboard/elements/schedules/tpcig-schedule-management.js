@@ -64,7 +64,6 @@
       if( !item.end_time ) {
         return true;
       }
-      let end_time = moment(item.end_time);
       if ( moment(item.end_time).diff(moment()) >= 0 ) {
         return true;
       }

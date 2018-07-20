@@ -1,0 +1,47 @@
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item-body.html">
+
+<dom-module id="room-status">
+  <template>
+    <style>
+    #label {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      background-color: #C4C4C4;
+      height: 29px;
+      @apply --layout-horizontal;
+      @apply --layout-center-center;
+    }
+    </style>
+    <div id="label">Room Status</div>
+    <div id="contents">
+      <paper-item><paper-item-body>
+          <div>Room Name</div>
+          <div secondary>[[activeRoom.name]]</div>
+      </paper-item-body></paper-item>
+      <paper-item><paper-item-body>
+          <div>Talk Name</div>
+          <div secondary>[[currentTalk.title]]</div>
+      </paper-item-body></paper-item>
+      <paper-item><paper-item-body>
+          <div>Speaker Name</div>
+          <div secondary>[[currentSpeaker.name]]</div>
+      </paper-item-body></paper-item>
+      <paper-item><paper-item-body>
+          <div>Start Time</div>
+          <div secondary>[[formatted_start]]</div>
+      </paper-item-body></paper-item>
+      <paper-item><paper-item-body>
+          <div>End Time</div>
+          <div secondary>[[formatted_end]]</div>
+      </paper-item-body></paper-item>
+      <paper-item><paper-item-body>
+          <div>Duration</div>
+          <div secondary>[[currentTalk.duration]]</div>
+      </paper-item-body></paper-item>
+    </div>
+  </template>
+  <script src="room-status.js"></script>
+</dom-module>

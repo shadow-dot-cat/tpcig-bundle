@@ -47,6 +47,14 @@ function addSchedule(schedule) {
 
 // returns undef if it cant find schedule
 function findScheduleById(id) {
+  if ( id === 'break') {
+    return {
+      title: "Break Between Talks",
+      id: "break",
+      speaker_id: null,
+      duration: "Check Schedule"
+    }
+  }
   let schedule = scheduleRep.value.find(function(element) {
     return element.id === id;
   });
