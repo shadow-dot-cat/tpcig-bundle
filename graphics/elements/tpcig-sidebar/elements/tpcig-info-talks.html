@@ -1,0 +1,67 @@
+<dom-module id="tpcig-info-talks">
+  <template>
+    <style>
+      :host {
+        height: 100%;
+        width: 100%;
+      }
+
+      #title {
+        font-size: 150%;
+        font-weight: bold;
+      }
+
+      .speaker {
+        font-size: 130%;
+        font-weight: bold;
+      }
+
+      .title {
+        font-size: 120%;
+      }
+
+      #wrapper {
+        width: 100%;
+        @apply --layout-vertical;
+      }
+
+      .row {
+        @apply --layout-horizontal;
+        margin-left: 1em;
+        margin-right: 1em;
+        margin-top: 0.5em;
+        @apply --layout-justified;
+      }
+
+      .time-wrapper {
+        @apply --layout-horizontal;
+      }
+
+      hr {
+        width: 90%;
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+      }
+    </style>
+    <div id="wrapper">
+      <div id="title">Up Next</div>
+      <hr>
+      <template id="talkList" is="dom-repeat" items="[[talkList]]" as="talk" mutable-data>
+        <div class="talk">
+          <div class="row">
+            <div class="speaker">[[getSpeakerName(talk.speaker_id)]]</div>
+            <div class="time-wrapper">
+              [[formatTime(talk.start_time)]] - [[talk.duration]] mins
+            </div>
+          </div>
+          <div class="row">
+            <div class="title">[[talk.title]]</div>
+          </div>
+        </div>
+        <hr>
+      </template>
+    </div>
+  </template>
+  <script src="tpcig-info-talks.js"></script>
+</dom-module>
