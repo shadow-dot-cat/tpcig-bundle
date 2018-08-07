@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="style/layout.css">
+  <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <!-- Set up moment and locale correctly -->
+  <script src="../bower_components/moment/moment.js"></script>
+  <script src="../bower_components/moment/locale/en-gb.js"></script>
+  <script>moment.locale('en-GB');</script>
+
+  <link rel="import" href="../bower_components/polymer/polymer.html">
+  <link rel="import" href="elements/tpcig-sidebar/tpcig-sidebar.html">
+  <style>
+    body {
+      width: 550;
+      height: 1080;
+      overflow: hidden;
+    }
+    tpcig-sidebar {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <tpcig-sidebar></tpcig-sidebar>
+</body>
+</html>
