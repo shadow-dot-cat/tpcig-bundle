@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stream Tech Dashboard</title>
+  <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <!-- Set up moment and locale correctly -->
+  <script src="../bower_components/moment/moment.js"></script>
+  <script src="../bower_components/moment/locale/en-gb.js"></script>
+  <script>moment.locale('en-GB');</script>
+
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+  <link rel="import" href="elements/dashboards/tpcig-room-status.html">
+
+  <custom-style>
+    <style include="iron-flex iron-flex-alignment">
+      body {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+      }
+    </style>
+  </custom-style>
+
+</head>
+<body>
+  <tpcig-room-status></tpcig-room-status>
+</body>
+</html>

@@ -4,13 +4,15 @@ class TpcigRoomEditor extends Polymer.MutableData(Polymer.Element) {
   static get properties() {
     return {
       name: String,
-      room_id: String
+      room_id: String,
+      act_id: String
     };
   }
 
   loadRoom(room) {
     this.name = room.name;
     this.room_id = room.id;
+    this.act_id = room.act_id;
   }
 
   saveRoom() {

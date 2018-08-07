@@ -21,6 +21,13 @@
     "compatibleRange": "^1.1.2",
     "dashboardPanels": [
       {
+        "name": "Room Status Dashboard",
+        "title": "Room Status Dashboard",
+        "file": "room-status.html",
+        "headerColor": "#2d4e8a",
+        "fullbleed": true
+      },
+      {
         "name": "Stream Tech Dashboard",
         "title": "Stream Tech Dashboard",
         "file": "stream-tech-dashboard.html",
