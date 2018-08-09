@@ -12,38 +12,21 @@
   <script>moment.locale('en-GB');</script>
 
   <link rel="import" href="../bower_components/polymer/polymer.html">
-  <link rel="import" href="elements/tpcig-sponsors/tpcig-sponsors.html">
-  <link rel="import" href="elements/tpcig-sidebar/tpcig-sidebar.html">
-  <link rel="import" href="elements/tpcig-body/tpcig-body.html">
   <link rel="import" href="elements/tpcig-break/tpcig-break.html">
   <style>
     body {
       width: 1920;
       height: 1080;
-      background-image: url('/bundles/tpcig-bundle/graphics/elements/images/tpcig-main-background.png');
       overflow: hidden;
     }
-    tpcig-sidebar {
+    tpcig-break {
       position: absolute;
       top: 0;
       left: 0;
     }
-    tpcig-body {
-      position: absolute;
-      left: 550px;
-    }
-    tpcig-break {
-      position: absolute;
-      left: 550px;
-      top: 15px;
-      width: 1345px;
-      height: calc((1345px / 16) * 9);
-    }
   </style>
 </head>
 <body>
-  <tpcig-sidebar></tpcig-sidebar>
-  <tpcig-body></tpcig-body>
   <tpcig-break></tpcig-break>
 </body>
 </html>

@@ -1,6 +1,8 @@
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-checkbox/paper-checkbox.html">
+
 
 <dom-module id="room-edit">
   <template>
@@ -32,6 +34,10 @@
     #buttons {
       margin-top: 16px;
     }
+
+    #delete {
+      background: red;
+    }
     </style>
     <div id="title">Edit Room</div>
     <div class="row">
@@ -45,8 +51,10 @@
         value="{{act_id}}"
         always-float-label disabled>
       </paper-input>
+      <paper-checkbox checked="{{schedule_show}}">Show in Schedule</paper-checkbox>
     </div>
     <div id="buttons" class="row">
+      <paper-button id="delete" on-tap="deleteRoom" raised>Delete</paper-button>
       <paper-button id="save" on-tap="saveRoom" raised>Save</paper-button>
       <paper-button dialog-dismiss raised autofocus>Cancel</paper-button>
     </div>

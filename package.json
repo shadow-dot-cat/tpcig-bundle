@@ -78,6 +78,11 @@
         "file": "body.html",
         "width": 1370,
         "height": 1080
+      },
+      {
+        "file": "break.html",
+        "width": 1920,
+        "height": 1080
       }
     ],
     "assetCategories": [

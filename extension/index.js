@@ -11,6 +11,7 @@ module.exports = function (nodecg) {
   const scheduleRep = nodecg.Replicant('schedule', {defaultValue: []});
   const speakerRep = nodecg.Replicant('speaker', {defaultValue: []});
   const roomRep = nodecg.Replicant('room', {defaultValue: []});
+  const eventRep = nodecg.Replicant('event', {defaultValue: []});
   const currentTalksRep = nodecg.Replicant('currentTalks', {defaultValue: {}});
   const roomOrderRep = nodecg.Replicant('roomOrder', {defaultValue: []});
   const obsInstanceRep = nodecg.Replicant('obsInstance', {defaultValue: {}});

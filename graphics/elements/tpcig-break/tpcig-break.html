@@ -1,0 +1,61 @@
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="tpcig-break">
+  <template>
+    <style>
+      :host {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      #main {
+        background: url('elements/glasgow2.jpg') no-repeat center center;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+
+      }
+      #container {
+        @apply --layout-vertical;
+        width: 60%;
+        height: 100%;
+        margin: auto;
+        background: rgba(245,245,245,0.8);
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      #title {
+        text-align: center;
+        font-size: 400%;
+        font-weight: bold;
+      }
+
+      #rowHeader {
+        @apply --layout-horizontal;
+      }
+
+      .timeHeader {
+        width: 7%;
+      }
+      .roomHeader {
+        @apply --layout-flex;
+        text-align: center;
+      }
+    </style>
+    <div id="main">
+      <div id="container">
+        <div id="title">
+          Schedule
+        </div>
+        <div id="rowHeader">
+          <div class="timeHeader">Time</div>
+          <template id="roomList" is="dom-repeat" items="[[rooms]]" as="room" mutable-data>
+            <div class="roomHeader">[[room.name]]</div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script src="tpcig-break.js"></script>
+</dom-module>

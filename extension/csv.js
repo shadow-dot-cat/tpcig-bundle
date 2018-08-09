@@ -2,7 +2,7 @@
 
 const moment =require('moment');
 const uuid = require('uuid/v4');
-const http = require('http');
+const http = require('https');
 const url = require('url');
 
 const nodecg = require('./util/nodecg-api-context').get();
@@ -10,14 +10,19 @@ const nodecg = require('./util/nodecg-api-context').get();
 const roomRep = nodecg.Replicant('room');
 const scheduleRep = nodecg.Replicant('schedule');
 const speakerRep = nodecg.Replicant('speaker');
+const eventRep = nodecg.Replicant('event');
 
 nodecg.listenFor('refreshActData', (data, cb) => {
   getActData(data, cb);
-})
+});
+
+nodecg.listenFor('refreshActEvents', (data, cb) => {
+  getActEvents(data, cb);
+});
 
 function getActData(data, cb) {
   const apiTalkUrl = url.format({
-    protocol: 'http',
+    protocol: 'https',
     hostname: 'act.perlconference.org',
     pathname: '/tpc-2018-glasgow/api/get_talks',
     query: {
@@ -36,6 +41,43 @@ function getActData(data, cb) {
   }).on('error', (err) => {
     cb(err.message);
   });
+}
+
+function getActEvents(data, cb) {
+  const apiTalkUrl = url.format({
+    protocol: 'https',
+    hostname: 'act.perlconference.org',
+    pathname: '/tpc-2018-glasgow/api/get_events',
+    query: {
+      api_key: nodecg.bundleConfig.actApiKey,
+      fields: 'title,room,datetime,event_id'
+    }
+  });
+  http.get(apiTalkUrl, (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      parseEvents(cb, JSON.parse(data));
+    });
+  }).on('error', (err) => {
+    cb(err.message);
+  });
+}
+
+function parseEvents(cb, data) {
+  data.forEach((e) => {
+    findOrCreateActRoom(e.room, {
+      act_id: e.room
+    });
+    findOrCreateActEvent(e.event_id, {
+      act_id: e.event_id,
+      room_id: e.room,
+      datetime: e.datetime
+    });
+  })
+  cb( null, data );
 }
 
 /*
@@ -97,6 +139,12 @@ function getRoomIndexByActId(act_id) {
   });
 }
 
+function getEventIndexByActId(act_id) {
+  return eventRep.value.findIndex((element) => {
+    return element.act_id === act_id;
+  });
+}
+
 function findOrCreateActSpeaker(act_id, data) {
   let index = getSpeakerIndexByActId(act_id);
   if ( index > -1 ) {
@@ -109,6 +157,10 @@ function findOrCreateActSpeaker(act_id, data) {
 }
 
 function findOrCreateActRoom(act_id, data) {
+  if ( act_id === '' ) {
+    // dont bother with an empty act ID room - those will be custom by us anyway
+    return;
+  }
   let index = getRoomIndexByActId(act_id);
   if ( index > -1 ) {
     roomRep.value[index] = Object.assign({}, roomRep.value[index], data);
@@ -148,5 +200,26 @@ function findOrCreateActTalk(act_id, data) {
       id: uuid()
     }, data);
     scheduleRep.value.push(new_schedule);
+  }
+}
+
+function findOrCreateActEvent(act_id, data) {
+  const index = getEventIndexByActId(act_id);
+  const room_index = getRoomIndexByActId(data.room_id);
+
+  if ( room_index > -1 ) { data.room_id = roomRep.value[room_index].id }
+  else { delete data.room_id }
+
+  let start_time;
+  if ( data.datetime !== undefined ) { start_time = moment(data.datetime, 'X') }
+
+  if ( start_time ) { data.start_time = start_time.toISOString() }
+  if ( index > -1 ) {
+    eventRep.value[index] = Object.assign({}, eventRep.value[index], data);
+  } else {
+    let new_event = Object.assign({
+      id: uuid()
+    }, data);
+    eventRep.value.push(new_event);
   }
 }
