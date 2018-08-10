@@ -21,6 +21,8 @@
     ready() {
       super.ready();
 
+      this.schedules = [];
+
       scheduleRep.on('change', newVal => {
         this.schedules = newVal;
         this._updateTalkList();

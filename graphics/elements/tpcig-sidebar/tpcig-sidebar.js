@@ -60,18 +60,18 @@
         if ( this.scheduleId !== null ) {
           this._showCurrentTalkHeader(this.scheduleId);
         }
-      })
+      });
 
       speakerRep.on('change', newVal => {
         if ( this.scheduleId !== null ) {
           this._showCurrentTalkHeader(this.scheduleId);
         }
-      })
+      });
 
       currentRep.on('change', newVal => {
         this.scheduleId = newVal[this.roomId];
         this._showCurrentTalkHeader(newVal[this.roomId]);
-      })
+      });
 
       //setInterval(() => {this.loopArray()}, 20000);
     }

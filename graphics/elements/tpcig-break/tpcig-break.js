@@ -105,7 +105,8 @@
     _updateSchedules() {
       let newSchedule = {};
       this._schedules.forEach((e) => {
-        if ( ! this._roomLookup[e.room_id].show ) { return };
+        if ( this._roomLookup[e.room_id] === undefined ) { return }
+        if ( ! this._roomLookup[e.room_id].show ) { return }
         let event_moment = moment(e.datetime, 'X');
         if ( event_moment.isBefore(this.today) ) { return }
         if ( event_moment.isAfter(this.today.clone().add(1, 'd')) ) { return }
@@ -131,14 +132,12 @@
       scheduleValues.forEach((e) => {
         if (e.events.length < this.rooms.length) {
           let needed_rooms = this.rooms.map(obj => obj.id);
-          console.log(needed_rooms);
           e.events.forEach((r) => {
             let room_index = needed_rooms.findIndex(item => item === r.data.room_id);
             // delete the room from the needed set
             needed_rooms.splice(room_index, 1);
           })
           needed_rooms.forEach((nr) => {
-            console.log(nr);
             e.events.push({data: {room_id: nr}});
           })
         }
