@@ -47,6 +47,7 @@
 
       #room {
         @apply --layout-flex;
+        margin-top: 15px;
       }
 
       #headerContent {
@@ -73,7 +74,7 @@
     </div>
     <div id="info" class="block">
       <tpcig-sidebar-room-name id="room" name="[[roomName]]"></tpcig-sidebar-room-name>
-      <div id="infoContent"></div>
+      <div id="infoContent"><tpcig-info-talks room-id="[[roomId]]"></tpcig-info-talks></div>
     </div>
     </div>
 </template>

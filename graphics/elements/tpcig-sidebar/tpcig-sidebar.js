@@ -5,7 +5,7 @@
   const speakerRep = nodecg.Replicant('speaker');
   const currentRep = nodecg.Replicant('currentTalks');
 
-  const infoArray = ['tpcig-info-talks'];
+  //const infoArray = ['tpcig-info-talks'];
 
   class TpcigSidebar extends Polymer.Element {
     static get is() { return "tpcig-sidebar" }
@@ -52,7 +52,7 @@
       roomRep.on('change', newVal => {
         if (this.roomId !== '') {
           this._updateRoom(this.roomId);
-          this.loopArray();
+          //this.loopArray();
         }
       });
 
@@ -73,7 +73,7 @@
         this._showCurrentTalkHeader(newVal[this.roomId]);
       })
 
-      setInterval(() => {this.loopArray()}, 20000);
+      //setInterval(() => {this.loopArray()}, 20000);
     }
 
     _showCurrentTalkHeader(id) {
@@ -104,14 +104,14 @@
       });
     }
 
-    loopArray() {
-      let next = infoArray.shift();
-      infoArray.push(next);
-      let nextElement = document.createElement(next);
-      nextElement.roomId = this.roomId;
-      this.$.infoContent.innerHTML = '';
-      this.$.infoContent.appendChild(nextElement);
-    }
+    // loopArray() {
+    //   let next = infoArray.shift();
+    //   infoArray.push(next);
+    //   let nextElement = document.createElement(next);
+    //   nextElement.roomId = this.roomId;
+    //   this.$.infoContent.innerHTML = '';
+    //   this.$.infoContent.appendChild(nextElement);
+    // }
 
     _setHeaderContent(name, args) {
       let element = document.createElement(name);
