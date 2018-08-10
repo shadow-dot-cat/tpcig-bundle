@@ -26,34 +26,88 @@
         padding-right: 5px;
       }
       #title {
+        margin-top: 25px;
         text-align: center;
         font-size: 400%;
         font-weight: bold;
       }
 
       #rowHeader {
+        margin-top: 50px;
         @apply --layout-horizontal;
       }
 
-      .timeHeader {
+      .timeCell {
         width: 7%;
+      }
+
+      .header {
+        background: rgba(245,245,245,1);
       }
       .roomHeader {
         @apply --layout-flex;
         text-align: center;
       }
+
+      .scheduleRow {
+        @apply --layout-horizontal;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      .eventRow {
+        @apply --layout-flex;
+        text-align: center;
+      }
+
+      .event {
+        font-style: italic;
+      }
+      .scheduleRow:nth-child(even) {
+        background: rgba(245,245,245,1);
+      }
+
+      .speaker {
+        font-size: 120%;
+        font-weight: bold;
+      }
+
+      .title {
+      }
     </style>
     <div id="main">
       <div id="container">
         <div id="title">
-          Schedule
+          Todays Schedule
         </div>
         <div id="rowHeader">
-          <div class="timeHeader">Time</div>
-          <template id="roomList" is="dom-repeat" items="[[rooms]]" as="room" mutable-data>
-            <div class="roomHeader">[[room.name]]</div>
+          <div class="timeCell header">Time</div>
+          <template id="roomHeader" is="dom-repeat" items="[[rooms]]" as="room" mutable-data>
+            <div class="roomHeader header">[[room.name]]</div>
           </template>
         </div>
+        <template id="rowRepeater" is="dom-repeat" items="[[display]]" mutable-data>
+          <div class="scheduleRow">
+              <template id="rowEvent" is="dom-if" if="{{item.is_event}}">
+                <div class="timeCell">
+                  [[item.time]]
+                </div>
+                <div class="eventRow event">
+                  [[item.title]]
+                </div>
+              </template>
+              <template id="rowTalk" is="dom-if" if="{{!item.is_event}}">
+                <div class="timeCell">
+                  [[item.time]]
+                </div>
+                <template is="dom-repeat" items="[[item.events]]" as="talk" mutable-data>
+                  <div class="eventRow">
+                    <div class="speaker">[[getSpeakerName(talk.data.speaker_id)]]</div>
+                    <div class="title">[[talk.data.title]]</div>
+                  </div>
+                </template>
+              </template>
+          </div>
+        </template>
       </div>
     </div>
   </template>

@@ -74,7 +74,8 @@ function parseEvents(cb, data) {
     findOrCreateActEvent(e.event_id, {
       act_id: e.event_id,
       room_id: e.room,
-      datetime: e.datetime
+      datetime: e.datetime,
+      title: e.title
     });
   })
   cb( null, data );
