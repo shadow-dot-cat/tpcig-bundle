@@ -15,6 +15,8 @@ module.exports = function (nodecg) {
   const currentTalksRep = nodecg.Replicant('currentTalks', {defaultValue: {}});
   const roomOrderRep = nodecg.Replicant('roomOrder', {defaultValue: []});
   const obsInstanceRep = nodecg.Replicant('obsInstance', {defaultValue: {}});
+  const obsConnectionRep = nodecg.Replicant('obsConnection', {defaultValue: []});
+
 
   // Sub modules
   require('./speaker');

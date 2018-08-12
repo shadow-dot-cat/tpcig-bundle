@@ -158,9 +158,9 @@ function findOrCreateActSpeaker(act_id, data) {
 }
 
 function findOrCreateActRoom(act_id, data) {
-  if ( act_id === '' ) {
+  if ( act_id === undefined || act_id === '' ) {
     // dont bother with an empty act ID room - those will be custom by us anyway
-    return;
+    return -1;
   }
   let index = getRoomIndexByActId(act_id);
   if ( index > -1 ) {

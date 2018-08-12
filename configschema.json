@@ -8,7 +8,12 @@
 			"type": "string",
 			"description": "Key for accessing ACT Api Endpoints",
 			"default": "CHANGEME"
-		}
+		},
+    "sponsorScrollSpeed": {
+      "type": "integer",
+      "description": "Speed of changes for sponsor section in seconds",
+      "default": 30
+    }
   },
   "required": ["actApiKey"]
 }

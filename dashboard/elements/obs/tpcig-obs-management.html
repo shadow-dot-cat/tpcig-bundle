@@ -6,6 +6,7 @@
 <link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="obs-item.html">
 <link rel="import" href="obs-edit.html">
+<link rel="import" href="obs-conn.html">
 
 <dom-module id="tpcig-obs-management">
   <template>
@@ -53,8 +54,28 @@
       </div>
       <div id="empty">There are no obss! Oh No!</div>
     </div>
+    <div>
+      <div id="label">OBS Connections</div>
+      <div id="connections">
+        <template is="dom-repeat" items="[[obsCons]]" as="stream" mutable-data>
+          <paper-item>
+            <paper-item-body>
+              [[stream.stream]] - [[stream.ip]] - [[getRoomName(stream.room_id)]]
+            </paper-item-body>
+            <template is="dom-if" if="[[showConnect(stream)]]">
+              <paper-button class="edit" raised on-tap="connectStream">Connect</paper-button>
+              <paper-button class="edit" raised on-tap="disconnectStream">Disconnect</paper-button>
+            </template>
+            <paper-button class="edit" raised on-tap="editStream">Edit</paper-button>
+          </paper-item>
+        </template>
+      </div>
+    </div>
     <paper-dialog id="editRoom" with-backdrop>
       <obs-edit id="editor"></obs-edit>
+    </paper-dialog>
+    <paper-dialog id="editStream" with-backdrop>
+      <obs-conn id="connEdit"></obs-conn>
     </paper-dialog>
   </template>
   <script src="tpcig-obs-management.js"></script>
