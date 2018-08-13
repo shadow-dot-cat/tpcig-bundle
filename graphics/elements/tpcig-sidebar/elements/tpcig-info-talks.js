@@ -43,7 +43,7 @@
 
     _updateTalkList() {
       //get next three talks based on start time (but from today)
-      const today = moment('2018-08-15 12:40');
+      const today = moment();
 
       // Filter for just the talks we care about
       let talkArray = this.schedules.filter(
