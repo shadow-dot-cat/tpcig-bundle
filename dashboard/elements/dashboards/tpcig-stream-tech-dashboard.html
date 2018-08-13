@@ -3,6 +3,8 @@
 <link rel="import" href="../room-select/room-select.html">
 <link rel="import" href="../room-schedule/room-schedule.html">
 <link rel="import" href="../room-status/room-status.html">
+<link rel="import" href="../obs/obs-control.html">
+
 
 <dom-module id="tpcig-stream-tech-dashboard">
   <template>
@@ -58,9 +60,6 @@
       .fill {
         @apply --layout-flex;
       }
-      .test {
-        height: 100px;
-      }
     </style>
     <div id="wrapper">
       <div id="container">
@@ -68,10 +67,11 @@
           <room-select class="bordered" active-room="{{activeRoom}}"></room-select>
           <room-schedule class="bordered fill" active-room="{{activeRoom}}"></room-schedule>
         </div>
-        <div id="rightColumn" class="column">
+        <div id="centerColumn" class="column">
           <room-status class="bordered fill" active-room="{{activeRoom}}"></room-status>
-          <div class="bordered fill">
-          </div>
+        </div>
+        <div id="rightColumn" class="column">
+          <obs-control class="bordered" active-room="{{activeRoom}}"></obs-control>
         </div>
       </div>
     </div>

@@ -1,0 +1,65 @@
+<link rel="import" href="../../../bower_components/paper-card/paper-card.html">
+
+<dom-module id="obs-control">
+  <template>
+    <style>
+      #label {
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: #C4C4C4;
+        height: 29px;
+        @apply --layout-horizontal;
+        @apply --layout-center-center;
+      }
+
+      .label {
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: #C4C4C4;
+        height: 29px;
+        @apply --layout-horizontal;
+        @apply --layout-center-center;
+      }
+
+      .card {
+        height: 25%;
+      }
+
+      .card > img {
+        height: 120px;
+      }
+    </style>
+    <div id="label">OBS Control</div>
+    <template is="dom-if" if="[[!hasConn]]">
+      <div>No OBS Connection found for room</div>
+    </template>
+    <template is="dom-if" if="[[hasConn]]">
+      <div id="contents">
+        <div class="card">
+          <div class="label">Speaker No Slides</div>
+          <img src="elements/obs/elements/speaker-no-slides.png" />
+          <paper-button on-tap="showSpeakerNoSlides" raised>Show</paper-button>
+        </div>
+        <div class="card">
+          <div class="label">Slides No Speaker</div>
+          <img src="elements/obs/elements/slides-no-speaker.png">
+          <paper-button on-tap="showSlidesNoSpeaker" raised>Show</paper-button>
+        </div>
+        <div class="card">
+          <div class="label">Speaker With Slides</div>
+          <img src="elements/obs/elements/speaker-with-slides.png">
+          <paper-button on-tap="showSpeakerWithSlides" raised>Show</paper-button>
+        </div>
+        <div class="card">
+          <div class="label">Slides With Speaker</div>
+          <img src="elements/obs/elements/slides-with-speaker.png">
+          <paper-button on-tap="showSlidesWithSpeaker" raised>Show</paper-button>
+        </div>
+      </div>
+    </template>
+
+</template>
+<script src="obs-control.js"></script>
+</dom-module>

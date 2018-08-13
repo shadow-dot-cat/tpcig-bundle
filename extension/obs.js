@@ -148,7 +148,7 @@ nodecg.listenFor('obsInstanceChangeScene', (data, cb) => {
       cb('OBS Not Connected');
     }
     nodecg.log.info(`Changing scene on obs ${data.obs} to ${data.scene}`);
-    obs[data].setCurrentScene({'scene-name': data.scene});
+    obs[data.obs].setCurrentScene({'scene-name': data.scene});
   } else {
     cb('Incorrect Arguments');
   }
