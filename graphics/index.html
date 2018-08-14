@@ -4,42 +4,15 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="style/layout.css">
-    <link rel="import" href="/bundles/tpcig-bundle/bower_components/polymer/polymer.html">
-    <link rel="import" href="elements/tpcig-sponsors/tpcig-sponsors.html">
+    <style>
+    body {
+      width: 1920;
+      height: 1080;
+      background: white url('/bundles/tpcig-bundle/graphics/elements/images/tpcig-main-background.png');
+      overflow: hidden;
+    }
+    </style>
 </head>
 <body>
-  <div id="container">
-    <layout-app></layout-app>
-  </div>
-  <dom-module id="layout-app">
-    <template>
-      <style>
-        #bottomRight {
-          display: flex;
-          flex-direction: column;
-          position: absolute;
-          left: 1200px;
-          top: 400px;
-          width: 720px;
-          height: 780px;
-        }
-      </style>
-      <div id="bottomRight">
-        <tpcig-sponsors></tpcig-sponsors>
-      </div>
-    </template>
-    <script>
-      Polymer({
-        is: 'layout-app'
-      });
-    </script>
-  </dom-module>
-  <script>
-(function() {
-  nodecg.listenFor('ping', message => {
-    nodecg.log.info(message);
-  });
-})();
-  </script>
 </body>
 </html>
