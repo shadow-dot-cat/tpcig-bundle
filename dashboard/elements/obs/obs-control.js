@@ -35,6 +35,7 @@
     showSpeakerWithSlides() { this.showScene('Speaker With Slides'); }
     showSlidesNoSpeaker()   { this.showScene('Slides No Speaker'); }
     showSlidesWithSpeaker() { this.showScene('Slides With Speaker'); }
+    showBreak() { this.showScene('Break'); }
 
     showScene(name) {
       if( !this.hasConn ) { return };
